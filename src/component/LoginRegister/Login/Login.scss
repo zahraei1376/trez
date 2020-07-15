@@ -1,0 +1,114 @@
+@import '../../../sass/abstract/variable';
+
+.login{
+    border: 1px solid $color-red-light;
+    width: 35%;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media only screen and (max-width: 56.25em) { 
+        width: 90%;
+    };
+
+    &__img{
+        width: 80%;
+    }
+
+    &__groupsInput{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    &__groupInput{
+        display: flex;
+        margin-top: 1rem;
+
+        &-icon{
+            font-size: 1rem;
+            background-color: $color-grey;
+            padding: .5rem .9rem;
+            border-radius: .25rem;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid $color-grey-dark;
+        }
+    }
+
+    &__Input{
+        width: 100%;
+        height: 2rem;
+        border: 1px solid $color-grey-dark;
+        border-right: none;
+        text-align: right;
+        padding: 0 1rem;
+        &:focus{
+            outline: none;
+        }
+    }
+
+    &__group{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 4rem;
+
+        &-numbers{
+            display: flex;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        &-input{
+            height: 1rem;
+        }
+    }
+
+    &__btn{
+        display: block;
+        width: 80%;
+        font-size: 1rem;
+        padding: 1rem;
+        margin: .5rem 0;
+        color: $color-white;
+        background-color: $color-blue;
+        border-radius: .25rem;
+        transition: all .2s;
+        text-align: center;
+        outline: none;
+        border: none;
+        &:hover{
+            background-color: $color-blue-dark;
+        }
+    }
+
+    &__links{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__link{
+        color: $color-blue;
+        font-size: 1rem;
+        text-decoration: none;
+        &:hover{
+            text-decoration: solid;
+            text-decoration-color:$color-blue;
+        }
+    }
+}
+
+.green{
+    background-color: $color-green;
+
+    &:hover{
+        background-color: $color-green-dark;
+    }
+}
