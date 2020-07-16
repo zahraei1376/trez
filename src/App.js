@@ -18,7 +18,7 @@ const App =() => {
                 <Route path="/login" exact component={Login}/>
                 <Route path="/register" exact component={Register}/>
                 {/* <Route path="/Profile" exact component={Profile}/> */}
-                {/* <Route path="/ChangePass" exact component={ChangePass}/> */}
+                <Route path="/forgotPass" exact component={ForgotPass}/>
             </Suspense>
         </Switch>
     </div>

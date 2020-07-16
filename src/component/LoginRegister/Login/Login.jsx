@@ -61,8 +61,9 @@ class Login extends React.Component{
        
     }
 
-    handeNewRegister =(e)=>{
-        
+    handeNewRegister = () =>{
+        console.log("new register");
+        this.props.history.push(`/register`)
     }
 
     handleNumbers = (e) =>{
@@ -120,8 +121,8 @@ class Login extends React.Component{
                 <button className="login__btn margin-top-small" onClick={this.handelLogin}>ورود به حساب کاربری</button>
                 <button className="login__btn green" onClick={this.handeNewRegister}>حساب کاربری جدید</button>
                 <div className="login__links margin-top-small margin-bottom-small">
-                    <Link to="" className="login__link">آیا ثبت نام نکرده اید؟</Link>
-                    <Link to="" className="login__link">آیا رمزعبور خود را فراموش کرده اید؟</Link>
+                    <Link to="/register" className="login__link">آیا ثبت نام نکرده اید؟</Link>
+                    <Link to="/forgotPass" className="login__link">آیا رمزعبور خود را فراموش کرده اید؟</Link>
                 </div>
             </div>
         )
