@@ -3,6 +3,7 @@ import './Login.scss';
 // //////////////////
 import { Link } from 'react-router-dom';
 import PopUp from '../../popUp/popup';
+import ReCAPTCHA from "react-google-recaptcha";
 
 class Login extends React.Component{
     constructor(props){
@@ -73,17 +74,21 @@ class Login extends React.Component{
         // return this.numbers;
     }
 
-    createNumbers = () =>{
-        console.log("nnew")
-        for (let index = 0; index < 5; index++) {
-            this.number += Math.floor(Math.random()*10)+1;
-        }
-        return this.number;
-        // this.number=""
+    
+
+    // createNumbers = () =>{
+    //     console.log("nnew")
+    //     for (let index = 0; index < 5; index++) {
+    //         this.number += Math.floor(Math.random()*10)+1;
+    //     }
+    //     return this.number;
+    // }
+    onChange(value) {
+        console.log("Captcha value:", value);
     }
 
     render(){
-
+        
         if(this.state.status!=null){
             return <PopUp status={this.state.status} message={this.state.message} />
         }
@@ -103,10 +108,14 @@ class Login extends React.Component{
                     </div>
                 </div>
                 <div className="login__group margin-bottom-small">
-                    <div className="login__group-numbers">
+                    <ReCAPTCHA
+                        sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                        onChange={this.onChange}
+                    />
+                    {/* <div className="login__group-numbers">
                         <i class='fas fa-sync-alt' onClick={this.createNumbers}></i>{this.number}
                     </div>
-                    <input className="login__group-input" type="text" name="numbers" value={this.state.Numbers} onChange={this.handleNumbers} />
+                    <input className="login__group-input" type="text" name="numbers" value={this.state.Numbers} onChange={this.handleNumbers} /> */}
                 </div>
                 <button className="login__btn margin-top-small" onClick={this.handelLogin}>ورود به حساب کاربری</button>
                 <button className="login__btn green" onClick={this.handeNewRegister}>حساب کاربری جدید</button>

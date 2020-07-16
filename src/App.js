@@ -6,6 +6,7 @@ import Spinner from './component/spinner/spinner';
 ///////////////////////////
 const Login = lazy( ()=> import('./component/LoginRegister/Login/Login'));
 const Register = lazy( ()=> import('./component/LoginRegister/Register/register'));
+const ForgotPass = lazy( ()=> import("./component/forgotPass/forgotPass"));
 ////////////////////////////
 
 const App =() => {

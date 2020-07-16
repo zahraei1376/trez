@@ -1,8 +1,8 @@
 import React from 'react';
-import './Register.scss';
+import './forgot.scss';
 import ReCAPTCHA from "react-google-recaptcha";
 
-class Register extends React.Component{
+class ForgotPass extends React.Component{
     constructor(props){
         super(props);
         this.state={
@@ -19,7 +19,7 @@ class Register extends React.Component{
             MobileNumber:this.state.mobileNumber,
             AccessHash :""
         }
-        fetch("Https://smscore.trez.ir/api/V1/User/RegisterUserMobile", {
+        fetch("Https://smscore.trez.ir/api/V1/User/ForgetPasswordWithUserName ", {
             headers: {
                 'Content-Type': 'application/json'
                 },
@@ -43,8 +43,8 @@ class Register extends React.Component{
 
     render(){
         return(
-            <div className="register">
-                <h2 className="register__title margin-top-small">عضویت</h2>
+            <div className="forgot">
+                <div className="forgot__title">بازیابی رمز عبور و نام کاربری</div>
                 <h2 className="register__Subtitle margin-top-small">شماره همراه خود را وارد کنید</h2>
                 <input type="text" className="register__input margin-top-small" value={this.state.mobileNumber} onChange={this.handlemobileNumber}></input>
                 <p className="register__Sub margin-bottom-small">شماره همراه وارد شده باید به صورت 09116665601 باشد</p>
@@ -66,4 +66,4 @@ class Register extends React.Component{
     }
 };
 
-export default Register;
+export default ForgotPass;
