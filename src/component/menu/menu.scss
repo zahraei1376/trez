@@ -1,0 +1,25 @@
+@import "../../sass/abstract/variable";
+
+.navbar{
+    display: flex;
+    background-color: $color-grey-light-3;
+    // border-bottom: 1px solid $color-grey-dark;
+    box-shadow: 0 2px 1rem rgba($color-black, .3);
+
+    &__item{
+        padding: 1rem 2rem;
+        text-decoration: none;
+        font-size: 1rem;
+        color: $color-black;
+
+        &:hover{
+            color: $color-white;
+            background-color: $color-grey-light;
+        }
+
+        @media only screen and (max-width:52.5em) {
+            padding: 1rem;
+            font-size: .7rem;
+        }
+    }
+}

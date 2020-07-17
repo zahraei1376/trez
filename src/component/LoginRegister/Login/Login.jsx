@@ -96,7 +96,7 @@ class Login extends React.Component{
 
         return(
             <div className="login">
-                <img className="login__img" src="https://smscore.trez.ir/Uploads/WebApp/1/Headers/OutImg.jpg" alt="login" />
+                <img className="login__img margin-top-small" src="https://smscore.trez.ir/Uploads/WebApp/1/Headers/OutImg.jpg" alt="login" />
                 <div className="login__groupsInput">
                     <div className="login__groupInput">
                         <i class='fa fa-user login__groupInput-icon'></i>

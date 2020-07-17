@@ -54,7 +54,7 @@ class Register extends React.Component{
                 />
                 <div className="register__rules margin-top-small">
                     <input type="checkbox" id="rules" name="rules" value="Car" style={{marginLeft:"8px"}}/>
-                    <label for="rules"> من شرایط و قوانین را مطالعه کردم</label><br></br>
+                    <label for="rules" style={{fontSize:".8rem"}}> من شرایط و قوانین را مطالعه کردم</label><br></br>
                 </div>
                 <div className="register__btns margin-top-small margin-bottom-small">
                     <button className="register__btn green" onClick={this.submitRegister}>ثبت نام</button>

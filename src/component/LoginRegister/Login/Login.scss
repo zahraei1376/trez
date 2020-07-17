@@ -1,7 +1,7 @@
 @import '../../../sass/abstract/variable';
 
 .login{
-    border: 1px solid $color-red-light;
+    border: 3px solid $color-grey-light-3;
     width: 35%;
     margin: 2rem auto;
     display: flex;
@@ -14,7 +14,7 @@
     };
 
     &__img{
-        width: 80%;
+        width: 70%;
     }
 
     &__groupsInput{

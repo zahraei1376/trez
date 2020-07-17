@@ -3,6 +3,7 @@ import './App.scss';
 ////////////////////////////
 import {Switch,Route} from 'react-router-dom';
 import Spinner from './component/spinner/spinner';
+import Nav from "./component/menu/menu";
 ///////////////////////////
 const Login = lazy( ()=> import('./component/LoginRegister/Login/Login'));
 const Register = lazy( ()=> import('./component/LoginRegister/Register/register'));
@@ -12,6 +13,7 @@ const ForgotPass = lazy( ()=> import("./component/forgotPass/forgotPass"));
 const App =() => {
   return (
     <div className="App">
+      <Nav/>
        <Switch>
             <Suspense fallback={<Spinner/>}>
                 {/* <Route path="/" exact component = {MainPage}/> */}

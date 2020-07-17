@@ -2,6 +2,9 @@
 
 .forgot{
     overflow: hidden;
+    width: 90%;
+    margin: 5rem auto;
+    border: 1px solid $color-grey-light;
     // max-width: 81.3rem;
     &__title{
         background-color: $color-grey-light-2;

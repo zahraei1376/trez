@@ -14,7 +14,7 @@ class ForgotPass extends React.Component{
             <div className="forgot">
                 <div className="forgot__title">بازیابی رمز عبور و نام کاربری</div>
                 <p className="forgot__Subtitle margin-top-small">لطفا اطلاعات زیر را به دقت وارد کنید و دکمه ارسال را کلیک کنید.در صورت صحت اطلاعات کلمه عبور جدید برای شما پیامک خواهد شد .</p>
-                <div className="forgot__forms margin-top-small">
+                <div className="forgot__forms margin-top-large">
                     <form className="forgot__form"  action="Https://smscore.trez.ir/api/V1/User/ForgetPasswordWithUserName">
                         <div className="forgot__form-title">فراموشی رمز عبور</div>
                         <div className="forgot__groupsInput margin-top-small">
