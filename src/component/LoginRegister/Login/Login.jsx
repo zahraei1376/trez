@@ -2,20 +2,27 @@ import React from 'react';
 import './Login.scss';
 // //////////////////
 import { Link } from 'react-router-dom';
+import {connect } from 'react-redux';
+import  { Redirect } from 'react-router-dom'
+/////////////////////
 import PopUp from '../../popUp/popup';
-import ReCAPTCHA from "react-google-recaptcha";
+import { setCurrentUser } from '../../../redux/user/user.actions';
+import Spinner from '../../spinner/spinner';
+////////////////////////
 
 class Login extends React.Component{
     constructor(props){
         super(props);
-        this.number=""
         this.state={
             message:"",
-            token:"",
             status:null,
             username:"",
             password:"",
-            Numbers:""
+            Numbers:"",
+            value:"",
+            isloading:false,
+            showPopup:false,
+            randomNumber:""
         }
     }
 
@@ -27,14 +34,52 @@ class Login extends React.Component{
         this.setState({password:e.target.value})
     }
 
+    handleNumbers = (e) =>{
+        this.setState({Numbers:e.target.value})
+    }
+
+    handeNewRegister = () =>{
+        this.props.history.push(`/register`)
+    }
+
+    onChange = (value) => {
+        this.setState({ value });
+    }
+
+    togglePopup = () =>{
+        this.setState({showPopup: !this.state.showPopup});
+    }
+
+    createNumbers = () =>{
+        var num = "";
+        for (let index = 0; index < 6; index++) {
+            num += (Math.floor(Math.random() * 10));
+        }
+        this.setState({randomNumber:num});
+        console.log(this.randomNumber)
+    }
+
+    refreshNumber = () =>{
+        console.log("refresh");
+        this.createNumbers();
+    }
+
     handelLogin =(e)=>{
         e.preventDefault();
-        console.log("handelLogin")
-        if(this.state.Numbers=== this.number){
+        if(!(this.state.username && this.state.password)){
+            this.setState({status:1,message:"اطلاعات صحیح را وارد کنید!!"});
+            this.togglePopup();
+        }
+        else if (this.state.Numbers !== this.state.randomNumber){
+            this.setState({status:1,message:"تصویر امنیتی وارد شده مطابقت ندارد!!"});
+            this.togglePopup();
+        }
+        else{
+            this.setState({isloading:true});
             var data = {
                 UserName : this.state.username,
                 PassWord :this.state.password,
-                AccessHash :""
+                AccessHash :"9e1770e4-2c27-4e48-b72d-f1b9e3b519ab"
             }
             fetch("Https://smscore.trez.ir/api/V1/User/LoginUser", {
                 headers: {
@@ -44,58 +89,29 @@ class Login extends React.Component{
                 body: JSON.stringify(data)
             })
             .then((response)=>{ 
-                // this.setState({status:response.resultCode})
                 return response.json();   
             })
             .then((dataRes)=>{ 
-                this.setState({status:dataRes.resultCode ,message:dataRes.message , token:dataRes.result.result});
+                this.setState({status:dataRes.resultCode , message:dataRes.message , showPopup:true });
+                this.setState({isloading:false});
+                if(dataRes.resultCode === 0){
+                    // this.setState({isloading:false});
+                    this.props.setCurrentUser(dataRes.result.result);
+                    return <Redirect to="/" />
+                }
                 
             })
             .catch(
                 console.log('err')
             )
-        }  
-        else{
-            return <PopUp status={1} message={"تصویر امنیتی وارد شده مطابقت ندارد"}/>
         }
-       
-    }
-
-    handeNewRegister = () =>{
-        console.log("new register");
-        this.props.history.push(`/register`)
-    }
-
-    handleNumbers = (e) =>{
-        this.setState({Numbers:e.target.value})
-        // console.log("nnew")
-        // for (let index = 0; index < 5; index++) {
-        //     this.numbers += Math.floor(Math.random()*10)+1;
-        // }
-        // return this.numbers;
-    }
-
-    
-
-    // createNumbers = () =>{
-    //     console.log("nnew")
-    //     for (let index = 0; index < 5; index++) {
-    //         this.number += Math.floor(Math.random()*10)+1;
-    //     }
-    //     return this.number;
-    // }
-    onChange(value) {
-        console.log("Captcha value:", value);
     }
 
     render(){
-        
-        if(this.state.status!=null){
-            return <PopUp status={this.state.status} message={this.state.message} />
-        }
-
+        // this.createNumbers();
         return(
             <div className="login">
+                {this.state.isloading ? <Spinner/> : null}
                 <img className="login__img margin-top-small" src="https://smscore.trez.ir/Uploads/WebApp/1/Headers/OutImg.jpg" alt="login" />
                 <div className="login__groupsInput">
                     <div className="login__groupInput">
@@ -104,19 +120,14 @@ class Login extends React.Component{
                     </div>
                     <div className="login__groupInput">
                         <i class='fa fa-lock login__groupInput-icon'></i>
-                        <input className="login__Input" type="text" name="password" value={this.state.password} placeholder="پسورد" onChange={this.handlePassword} />
-                        
+                        <input className="login__Input" type="password" name="password" value={this.state.password} placeholder="پسورد" onChange={this.handlePassword} />
                     </div>
                 </div>
-                <div className="login__group margin-bottom-small">
-                    <ReCAPTCHA
-                        sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                        onChange={this.onChange}
-                    />
-                    {/* <div className="login__group-numbers">
-                        <i class='fas fa-sync-alt' onClick={this.createNumbers}></i>{this.number}
+                <div className="login__group margin-bottom-small numbers">
+                    <div>
+                        {this.state.randomNumber}<i className="fa fa-refresh numbers__icon" onClick={this.refreshNumber}></i>
                     </div>
-                    <input className="login__group-input" type="text" name="numbers" value={this.state.Numbers} onChange={this.handleNumbers} /> */}
+                    <input type="text" value={this.state.Numbers} onChange={this.handleNumbers} />
                 </div>
                 <button className="login__btn margin-top-small" onClick={this.handelLogin}>ورود به حساب کاربری</button>
                 <button className="login__btn green" onClick={this.handeNewRegister}>حساب کاربری جدید</button>
@@ -124,9 +135,15 @@ class Login extends React.Component{
                     <Link to="/register" className="login__link">آیا ثبت نام نکرده اید؟</Link>
                     <Link to="/forgotPass" className="login__link">آیا رمزعبور خود را فراموش کرده اید؟</Link>
                 </div>
+                
+                {this.state.showPopup &&  this.state.message ? <PopUp  message = {this.state.message} status={this.state.status} closePopup={this.togglePopup} /> : null}
             </div>
         )
     }
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentUser: (data) => dispatch(setCurrentUser(data))
+});
+
+export default connect(null , mapDispatchToProps)(Login);

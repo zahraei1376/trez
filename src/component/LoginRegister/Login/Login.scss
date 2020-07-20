@@ -112,3 +112,11 @@
         background-color: $color-green-dark;
     }
 }
+
+.numbers{
+    // display: flex;
+    font-size: 2rem;
+    &__icon{
+        margin-right: 1rem;
+    }
+}
